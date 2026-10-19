@@ -1,19 +1,21 @@
-# Skills cho Claude Code
+# Claude Code skills
 
-| Skill | Làm gì |
+| Skill | What it does |
 |---|---|
-| `cach-lam-viec` | Cách làm việc: giải thích sâu cho người mới, thiết kế hệ thống tốt, tiết kiệm token (định hướng linh hoạt) |
-| `plan-board` | Bảng kế hoạch web trực quan trong `.board/` |
+| `work-style` | How to work: deep beginner-friendly explanations, good system design, token efficiency (flexible guidance) |
+| `plan-board` | Visual web planning board in `.board/` |
 
-## Cài lại
+## Reinstall
 ```bash
 git clone https://github.com/amthls/skill.git
-cp -r skill/cach-lam-viec skill/plan-board ~/.claude/skills/
-cd ~/.claude/skills/plan-board/ui && pnpm install   # chỉ cần nếu muốn build lại UI
+cp -r skill/work-style skill/plan-board ~/.claude/skills/
+cd ~/.claude/skills/plan-board/ui && pnpm install   # only needed to rebuild the UI
 ```
-Thêm vào `~/.claude/CLAUDE.md`:
+Add to `~/.claude/CLAUDE.md`:
 ```
-- Khi muốn lập kế hoạch/thiết kế/giải thích kiến trúc dự án → dùng skill `plan-board`.
-- Khi lên kế hoạch, thiết kế, giải thích dự án hoặc làm việc nhiều bước → nạp skill `cach-lam-viec`.
+- When planning/designing/explaining a project's architecture → use the `plan-board` skill.
+- When planning, designing, explaining a project, or doing multi-step work → load the `work-style` skill.
 ```
-Hook góp ý của plan-board: xem `plan-board/settings-snippet.json`.
+plan-board feedback hook: see `plan-board/settings-snippet.json`.
+
+Note: plan-board templates and docs are still in Vietnamese.
