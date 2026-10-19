@@ -1,0 +1,45 @@
+# Demo: ứng dụng ghi chú việc cần làm (todo). Bao phủ mọi tính năng DSL.
+== data: Dữ liệu | Lưu và kiểm tra việc cần làm
+src/data/store.js : Kho lưu việc, đọc/ghi localStorage #storage !moderate
+  fn load() -> Task[] : Đọc toàn bộ việc
+  fn save(tasks) -> void : Ghi lại toàn bộ
+src/data/schema.js : Định dạng một việc + kiểm tra #validation
+  fn validate(task) -> boolean : Kiểm tra tên không rỗng
+
+== logic: Logic | Quy tắc thuần, không đụng giao diện
+src/core/tasks.js : Thêm, sửa, xoá, lọc việc #core !complex
+  fn addTask(title) -> Task : Thêm một việc mới
+  fn toggleDone(id) -> Task : Đánh dấu xong/chưa
+src/core/filters.js : Lọc theo trạng thái
+
+== ui: Giao diện
+src/ui/list.js : Danh sách việc
+src/ui/form.js : Ô nhập việc mới #input
+--
+# Từ đây node không thuộc layer nào
+src/app.js : Điểm vào, nối mọi phần #entry
+lib:react [service] : Thư viện giao diện (CDN)
+sync-later : Ý tưởng đồng bộ đám mây (chưa làm) !simple
+db/schema.sql [schema] : Bản thiết kế cơ sở dữ liệu sau này
+
+# cạnh: một nguồn nhiều đích, mặc định imports khi cả hai đều là file
+src/app.js -> src/ui/list.js, src/ui/form.js : app dựng giao diện
+src/ui/form.js -> src/core/tasks.js : gửi việc mới
+src/ui/list.js -> src/core/tasks.js, src/core/filters.js
+src/core/tasks.js -> src/data/store.js, src/data/schema.js : lưu và kiểm tra
+src/ui/list.js -> lib:react [depends_on] : dùng để vẽ
+src/core/tasks.js.addTask -> src/data/schema.js.validate : kiểm tra trước khi thêm
+sync-later -> src/data/store.js [related] : sẽ thay kho lưu
+
+>> flow add-task: Thêm một việc | Người dùng gõ tên và bấm Enter
+src/ui/form.js : Nhận chữ người dùng gõ | vào: chuỗi tên | ra: sự kiện submit
+src/core/tasks.js.addTask : Tạo việc mới | vào: tên việc | ra: {id, title, done:false}
+src/data/schema.js.validate : Chặn tên rỗng | vào: việc | ra: true/false
+src/data/store.js.save : Ghi vào localStorage
+src/ui/list.js : Vẽ lại danh sách | ra: dòng mới hiện ra
+
+>> flow toggle: Đánh dấu xong | Bấm vào ô tick
+src/ui/list.js : Nhận cú bấm | vào: id việc
+src/core/tasks.js.toggleDone : Đảo trạng thái done | ra: việc đã cập nhật
+src/data/store.js.save : Ghi lại
+

@@ -1,0 +1,31 @@
+# Dự án mobile: sơ đồ khung — thay bằng tên file/khái niệm thật của dự án
+
+== platform: Nền tảng | iOS/Android, quyền, thông báo
+platform : Nền tảng đích và quyền (khái niệm) #placeholder
+
+== data: Dữ liệu | Lưu cục bộ và đồng bộ
+src/data/local.js : Lưu trên máy #placeholder
+src/data/sync.js : Đồng bộ máy chủ #placeholder
+
+== core: Logic | Quy tắc, không dính giao diện
+src/core/app-logic.js : Xử lý chính #placeholder
+  fn perform(input) -> result : Việc chính
+
+== ui: Giao diện | Màn hình và điều hướng
+src/ui/home.js : Màn hình chính #placeholder
+src/ui/nav.js : Điều hướng #placeholder
+
+== test: Kiểm thử | Test logic và màn hình
+tests/logic.test.js : Test logic #placeholder
+
+# cạnh: nguồn -> đích1, đích2 [loại] : mô tả
+src/ui/home.js -> src/core/app-logic.js : gọi logic
+src/ui/nav.js -> src/ui/home.js
+src/core/app-logic.js -> src/data/local.js, src/data/sync.js
+src/core/app-logic.js -> tests/logic.test.js [tested_by]
+
+>> flow main: Luồng chính | Người dùng làm việc chính trên điện thoại
+src/ui/home.js : Người dùng chạm | vào: cú chạm | ra: sự kiện
+src/core/app-logic.js.perform : Xử lý | vào: sự kiện | ra: kết quả
+src/data/local.js : Lưu trên máy | vào: kết quả | ra: đã lưu
+src/data/sync.js : Đồng bộ khi có mạng | vào: đã lưu | ra: đã đồng bộ

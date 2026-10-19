@@ -1,0 +1,31 @@
+# Dự án web: sơ đồ khung — thay bằng tên file/khái niệm thật của dự án
+
+== infra: Hạ tầng | Nơi chạy và triển khai
+hosting : Nơi triển khai (chưa chọn) #placeholder
+
+== data: Dữ liệu | Lưu trữ và truy cập dữ liệu
+database : Cơ sở dữ liệu (chưa chọn) #placeholder
+src/data/repo.js : Đọc/ghi dữ liệu #placeholder
+
+== core: Logic | Quy tắc nghiệp vụ, không dính giao diện
+src/core/service.js : Xử lý chính #placeholder
+  fn handle(input) -> result : Việc chính của app
+
+== ui: Giao diện | Màn hình và tương tác
+src/ui/page.js : Trang chính #placeholder
+src/ui/form.js : Biểu mẫu nhập #placeholder
+
+== test: Kiểm thử | Kiểm tra tự động
+tests/core.test.js : Test logic #placeholder
+
+# cạnh: nguồn -> đích1, đích2 [loại] : mô tả
+src/ui/page.js -> src/ui/form.js, src/core/service.js : dựng và gọi
+src/core/service.js -> src/data/repo.js
+src/data/repo.js -> database [reads_from] : đọc/ghi
+src/core/service.js -> tests/core.test.js [tested_by]
+
+>> flow main: Luồng chính | Người dùng gửi biểu mẫu và thấy kết quả
+src/ui/form.js : Người dùng nhập và gửi | vào: dữ liệu form | ra: yêu cầu
+src/core/service.js.handle : Xử lý nghiệp vụ | vào: yêu cầu | ra: kết quả
+src/data/repo.js : Lưu dữ liệu | vào: kết quả | ra: đã lưu
+src/ui/page.js : Hiện kết quả | vào: đã lưu | ra: trang cập nhật

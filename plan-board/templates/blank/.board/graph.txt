@@ -1,0 +1,16 @@
+# Dự án mới: sơ đồ khung — thay bằng tên file/khái niệm thật của dự án
+
+== core: Lõi | Phần xử lý chính
+src/main.js : Điểm vào chương trình #placeholder
+logic : Quy tắc chính (khái niệm) #placeholder
+
+== ui: Giao diện | Phần người dùng thấy
+src/ui.js : Màn hình chính #placeholder
+
+# cạnh: nguồn -> đích1, đích2 [loại] : mô tả
+src/ui.js -> src/main.js : gọi lõi
+
+>> flow main: Luồng chính | Người dùng làm việc chính
+src/ui.js : Người dùng thao tác | vào: thao tác | ra: 
+src/main.js : Lõi xử lý | vào: yêu cầu | ra: kết quả
+src/ui.js : Hiện kết quả | vào: kết quả | ra: màn hình

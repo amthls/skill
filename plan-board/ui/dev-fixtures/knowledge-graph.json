@@ -1,0 +1,344 @@
+{
+ "version": "1.0.0",
+ "project": {
+  "name": "Rubik Solver",
+  "languages": [
+   "javascript",
+   "html",
+   "css"
+  ],
+  "frameworks": [],
+  "description": "Khối Rubik tương tác",
+  "analyzedAt": "2026-10-18T00:00:00.000Z",
+  "gitCommitHash": "plan"
+ },
+ "nodes": [
+  {
+   "id": "file:js/core/cube-model.js",
+   "type": "file",
+   "name": "cube-model.js",
+   "summary": "Lưu 54 ô màu và thực hiện phép xoay các mặt.",
+   "tags": [
+    "model"
+   ],
+   "complexity": "moderate",
+   "filePath": "js/core/cube-model.js"
+  },
+  {
+   "id": "function:js/core/cube-model.js:applyMove",
+   "type": "function",
+   "name": "applyMove",
+   "summary": "(state, move) -> state — Xoay 1 mặt",
+   "tags": [],
+   "complexity": "simple",
+   "filePath": "js/core/cube-model.js"
+  },
+  {
+   "id": "function:js/core/cube-model.js:parseMoves",
+   "type": "function",
+   "name": "parseMoves",
+   "summary": "(str) -> string[] — Tách chuỗi ký hiệu xoay",
+   "tags": [],
+   "complexity": "simple",
+   "filePath": "js/core/cube-model.js"
+  },
+  {
+   "id": "file:js/core/validate.js",
+   "type": "file",
+   "name": "validate.js",
+   "summary": "Người gác cổng: kiểm tra khối tô màu có giải được không.",
+   "tags": [
+    "rules"
+   ],
+   "complexity": "moderate",
+   "filePath": "js/core/validate.js"
+  },
+  {
+   "id": "file:js/core/solver.js",
+   "type": "file",
+   "name": "solver.js",
+   "summary": "Tìm lời giải bằng thuật toán hai pha.",
+   "tags": [],
+   "complexity": "complex",
+   "filePath": "js/core/solver.js"
+  },
+  {
+   "id": "file:js/ui/net-editor.js",
+   "type": "file",
+   "name": "net-editor.js",
+   "summary": "Lưới 2D để người dùng tô màu từng ô.",
+   "tags": [],
+   "complexity": "simple",
+   "filePath": "js/ui/net-editor.js"
+  },
+  {
+   "id": "file:js/ui/cube3d.js",
+   "type": "file",
+   "name": "cube3d.js",
+   "summary": "Khối lập phương 3D tương tác bằng Three.js.",
+   "tags": [],
+   "complexity": "moderate",
+   "filePath": "js/ui/cube3d.js"
+  },
+  {
+   "id": "file:js/ui/controls.js",
+   "type": "file",
+   "name": "controls.js",
+   "summary": "Nút Xáo, Giải, Hoàn tác và thanh tốc độ.",
+   "tags": [],
+   "complexity": "simple",
+   "filePath": "js/ui/controls.js"
+  },
+  {
+   "id": "file:js/app.js",
+   "type": "file",
+   "name": "app.js",
+   "summary": "Điểm vào: nối giao diện với bộ não.",
+   "tags": [],
+   "complexity": "moderate",
+   "filePath": "js/app.js"
+  },
+  {
+   "id": "lib:three",
+   "type": "service",
+   "name": "three",
+   "summary": "Thư viện 3D (CDN)",
+   "tags": [],
+   "complexity": "simple"
+  },
+  {
+   "id": "lib:kociemba",
+   "type": "service",
+   "name": "kociemba",
+   "summary": "Thư viện giải khối (WASM)",
+   "tags": [],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:js/infra/storage.js",
+   "type": "file",
+   "name": "storage.js",
+   "summary": "Lưu trạng thái vào localStorage.",
+   "tags": [],
+   "complexity": "simple",
+   "filePath": "js/infra/storage.js"
+  },
+  {
+   "id": "concept:gac-cong",
+   "type": "concept",
+   "name": "gac-cong",
+   "summary": "Ý tưởng: mọi thao tác phải qua validate trước khi vào model.",
+   "tags": [
+    "principle"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:index.html",
+   "type": "file",
+   "name": "index.html",
+   "summary": "Trang chính, nạp các module.",
+   "tags": [],
+   "complexity": "simple",
+   "filePath": "index.html"
+  },
+  {
+   "id": "file:css/style.css",
+   "type": "file",
+   "name": "style.css",
+   "summary": "Giao diện tối, bố cục hai cột.",
+   "tags": [],
+   "complexity": "simple",
+   "filePath": "css/style.css"
+  }
+ ],
+ "edges": [
+  {
+   "source": "file:js/core/cube-model.js",
+   "target": "function:js/core/cube-model.js:applyMove",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "file:js/core/cube-model.js",
+   "target": "function:js/core/cube-model.js:parseMoves",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "file:js/app.js",
+   "target": "file:js/core/validate.js",
+   "type": "imports",
+   "direction": "forward",
+   "description": "gọi",
+   "weight": 0.5
+  },
+  {
+   "source": "file:js/app.js",
+   "target": "file:js/ui/net-editor.js",
+   "type": "imports",
+   "direction": "forward",
+   "description": "gọi",
+   "weight": 0.5
+  },
+  {
+   "source": "file:js/app.js",
+   "target": "file:js/ui/cube3d.js",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "file:js/app.js",
+   "target": "file:js/ui/controls.js",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "file:js/app.js",
+   "target": "file:js/infra/storage.js",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "file:js/core/validate.js",
+   "target": "file:js/core/cube-model.js",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "file:js/core/solver.js",
+   "target": "file:js/core/cube-model.js",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "file:js/core/solver.js",
+   "target": "lib:kociemba",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "file:js/ui/cube3d.js",
+   "target": "lib:three",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "file:js/ui/net-editor.js",
+   "target": "file:js/core/cube-model.js",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "file:js/ui/controls.js",
+   "target": "file:js/core/solver.js",
+   "type": "calls",
+   "direction": "forward",
+   "description": "yêu cầu lời giải",
+   "weight": 0.5
+  },
+  {
+   "source": "file:index.html",
+   "target": "file:js/app.js",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "file:index.html",
+   "target": "file:css/style.css",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "concept:gac-cong",
+   "target": "file:js/core/validate.js",
+   "type": "documents",
+   "direction": "forward",
+   "weight": 0.5
+  }
+ ],
+ "layers": [
+  {
+   "id": "core",
+   "name": "Bộ não",
+   "description": "Logic thuần, không DOM",
+   "nodeIds": [
+    "file:js/core/cube-model.js",
+    "function:js/core/cube-model.js:applyMove",
+    "function:js/core/cube-model.js:parseMoves",
+    "file:js/core/validate.js",
+    "file:js/core/solver.js",
+    "concept:gac-cong"
+   ]
+  },
+  {
+   "id": "ui",
+   "name": "Giao diện",
+   "description": "Hiển thị và nhận thao tác",
+   "nodeIds": [
+    "file:js/ui/net-editor.js",
+    "file:js/ui/cube3d.js",
+    "file:js/ui/controls.js",
+    "file:js/app.js",
+    "file:index.html",
+    "file:css/style.css"
+   ]
+  },
+  {
+   "id": "infra",
+   "name": "Hạ tầng",
+   "description": "Thư viện ngoài và lưu trữ",
+   "nodeIds": [
+    "lib:three",
+    "lib:kociemba",
+    "file:js/infra/storage.js"
+   ]
+  }
+ ],
+ "tour": [
+  {
+   "order": 1,
+   "title": "Tô 1 ô · 1/4: Nhận chạm",
+   "description": "Nhận chạm\n\nvào: index: 20\nra: {index:20,color:\"R\"}",
+   "nodeIds": [
+    "file:js/ui/net-editor.js"
+   ]
+  },
+  {
+   "order": 2,
+   "title": "Tô 1 ô · 2/4: Gọi người gác cổng",
+   "description": "Gọi người gác cổng\n\nvào: —\nra: —",
+   "nodeIds": [
+    "file:js/app.js"
+   ]
+  },
+  {
+   "order": 3,
+   "title": "Tô 1 ô · 3/4: Kiểm tra khối còn giải được",
+   "description": "Kiểm tra khối còn giải được\n\nvào: —\nra: —",
+   "nodeIds": [
+    "file:js/core/validate.js"
+   ]
+  },
+  {
+   "order": 4,
+   "title": "Tô 1 ô · 4/4: Vẽ lại khối 3D",
+   "description": "Vẽ lại khối 3D\n\nvào: —\nra: —",
+   "nodeIds": [
+    "file:js/ui/cube3d.js"
+   ]
+  }
+ ]
+}

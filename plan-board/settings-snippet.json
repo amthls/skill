@@ -1,0 +1,14 @@
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"C:/Users/Admin/.claude/skills/plan-board/bin/board.mjs\" hook"
+          }
+        ]
+      }
+    ]
+  }
+}

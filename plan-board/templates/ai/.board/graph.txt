@@ -1,0 +1,33 @@
+# Dự án AI: sơ đồ khung — thay bằng tên file/khái niệm thật của dự án
+
+== data: Dữ liệu | Thu thập, làm sạch, gán nhãn
+data/raw/ : Dữ liệu thô (khái niệm) #placeholder
+src/data/prepare.py : Làm sạch và chia tập #placeholder
+  fn split(df) -> train,val,test : Chia tập
+
+== training: Huấn luyện | Vòng huấn luyện và cấu hình
+src/train/train.py : Huấn luyện mô hình #placeholder
+configs/train.yaml : Siêu tham số #placeholder
+
+== model: Mô hình | Kiến trúc và trọng số
+src/model/net.py : Kiến trúc mô hình #placeholder
+checkpoints/ : Trọng số đã lưu (khái niệm) #placeholder
+
+== serving: Phục vụ | Đưa mô hình ra dùng
+src/serve/app.py : API suy luận #placeholder
+
+== eval: Đánh giá | Đo chất lượng
+src/eval/metrics.py : Tính chỉ số #placeholder
+src/eval/report.py : Báo cáo kết quả #placeholder
+
+# cạnh: nguồn -> đích1, đích2 [loại] : mô tả
+src/train/train.py -> src/data/prepare.py, src/model/net.py, configs/train.yaml : đọc dữ liệu và dựng mô hình
+src/train/train.py -> checkpoints/ [writes_to] : lưu trọng số
+src/serve/app.py -> checkpoints/ [reads_from] : nạp trọng số
+src/eval/metrics.py -> src/model/net.py : chấm điểm
+
+>> flow train: Huấn luyện một vòng | Từ dữ liệu đến trọng số
+src/data/prepare.py.split : Chia tập | vào: dữ liệu sạch | ra: train/val/test
+src/train/train.py : Huấn luyện | vào: tập train | ra: mô hình
+src/eval/metrics.py : Đánh giá trên val | vào: mô hình + val | ra: chỉ số
+checkpoints/ : Lưu bản tốt nhất | vào: mô hình | ra: file trọng số

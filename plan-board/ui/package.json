@@ -1,0 +1,9 @@
+{
+  "name": "plan-board-ui",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "pnpm --filter @understand-anything/core build && pnpm --filter @understand-anything/dashboard build"
+  }
+}

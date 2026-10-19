@@ -1,0 +1,32 @@
+# Dự án API: sơ đồ khung — thay bằng tên file/khái niệm thật của dự án
+
+== infra: Hạ tầng | Chạy, cấu hình, giám sát
+hosting : Nơi chạy dịch vụ (chưa chọn) #placeholder
+config : Biến môi trường, bí mật #placeholder
+
+== data: Dữ liệu | Lưu trữ
+database : Cơ sở dữ liệu (chưa chọn) #placeholder
+src/data/repo.js : Truy cập dữ liệu #placeholder
+
+== service: Dịch vụ | Nghiệp vụ, không biết HTTP
+src/service/main.js : Xử lý nghiệp vụ chính #placeholder
+  fn run(input) -> result : Việc chính
+
+== api: API | Cổng HTTP, xác thực, kiểm tra đầu vào
+src/api/routes.js : Định tuyến #placeholder
+src/api/auth.js : Xác thực #placeholder
+
+== test: Kiểm thử | Test dịch vụ và API
+tests/api.test.js : Test API #placeholder
+
+# cạnh: nguồn -> đích1, đích2 [loại] : mô tả
+src/api/routes.js -> src/api/auth.js, src/service/main.js : kiểm tra rồi gọi
+src/service/main.js -> src/data/repo.js
+src/data/repo.js -> database [reads_from] : đọc/ghi
+src/api/routes.js -> tests/api.test.js [tested_by]
+
+>> flow request: Một yêu cầu | Từ request đến response
+src/api/auth.js : Xác thực | vào: token | ra: user
+src/api/routes.js : Kiểm tra đầu vào | vào: body JSON | ra: dữ liệu sạch
+src/service/main.js.run : Xử lý nghiệp vụ | vào: dữ liệu sạch | ra: kết quả
+src/data/repo.js : Lưu/đọc | vào: kết quả | ra: bản ghi

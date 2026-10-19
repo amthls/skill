@@ -1,0 +1,212 @@
+{
+ "board": {
+  "title": "Rubik Solver – Kế hoạch",
+  "subtitle": "Thảo luận kiến trúc và giao diện"
+ },
+ "pages": [
+  {
+   "id": "tong-quan",
+   "title": "Tổng quan",
+   "lead": "Mục tiêu, phạm vi và những việc cần quyết định",
+   "sections": [
+    {
+     "id": "muc-tieu",
+     "title": "Mục tiêu sản phẩm",
+     "lead": "Bạn sẽ hiểu app làm gì và dành cho ai.",
+     "blocks": [
+      {
+       "kind": "md",
+       "md": "Khối Rubik là món đồ chơi **54 ô màu**. App này cho phép bạn:\n\n1. Tô lại màu khối đang xáo ngoài đời thật\n2. Để máy tính tìm lời giải\n3. Xem từng bước xoay trên khối 3D\n\n| Thành phần | Vai trò | Độ khó |\n|---|---|---|\n| Bộ não (core) | Lưu trạng thái, xoay mặt | Vừa |\n| Giao diện (ui) | Lưới 2D + khối 3D | Dễ |\n| Giải khối | Thuật toán hai pha | Khó |\n\n> Nguyên tắc: mọi thao tác đi qua **người gác cổng** trước khi vào model."
+      },
+      {
+       "kind": "cards",
+       "items": [
+        {
+         "title": "Bạn tô màu",
+         "desc": "Tô lại khối đang xáo",
+         "icon": "🎨"
+        },
+        {
+         "title": "App suy nghĩ",
+         "desc": "Tìm lời giải",
+         "icon": "🧠"
+        },
+        {
+         "title": "Khối 3D",
+         "desc": "Xem từng bước xoay",
+         "icon": "🧊"
+        },
+        {
+         "title": "Lưu lại",
+         "desc": "Tiếp tục lần sau",
+         "icon": "💾"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "viec-can-chot",
+     "title": "Việc cần chốt",
+     "lead": "Bạn sẽ biết việc nào đã xong, việc nào còn mở.",
+     "blocks": [
+      {
+       "kind": "md",
+       "md": "Danh sách việc cần chốt trước khi code:\n\n- [x] Chọn bố cục hai cột\n- [x] Chốt bảng màu (6 màu chuẩn)\n- [ ] Chọn thư viện 3D\n- [ ] Viết bộ kiểm tra khối hợp lệ\n\nĐoạn mã ví dụ khi xoay một mặt:\n\n```js\nconst next = applyMove(state, \"R'\");\nif (!validate(next).ok) throw new Error('Khối không hợp lệ');\n```\n\nXem thêm [tài liệu Three.js](https://threejs.org/docs/) nếu cần."
+      }
+     ]
+    },
+    {
+     "id": "demo-nhung",
+     "title": "Bản demo nhúng",
+     "lead": "Bạn sẽ xem thử một trang demo ngay trong bảng.",
+     "blocks": [
+      {
+       "kind": "embed",
+       "src": "demo.html",
+       "height": 220
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ky-thuat",
+   "title": "Kỹ thuật",
+   "lead": "Kiến trúc, luồng dữ liệu và các quyết định công nghệ",
+   "sections": [
+    {
+     "id": "arch",
+     "title": "Kiến trúc 3 tầng",
+     "lead": "Bạn sẽ hiểu vì sao tách bộ não khỏi giao diện.",
+     "blocks": [
+      {
+       "kind": "md",
+       "md": "Ba tầng tách bạch giúp **test logic mà không cần trình duyệt**. Tầng giao diện chỉ gọi xuống tầng bộ não, không bao giờ ngược lại."
+      },
+      {
+       "kind": "graph",
+       "layers": [
+        "core",
+        "ui",
+        "infra"
+       ],
+       "max": 40,
+       "direction": "RIGHT",
+       "src": "plan",
+       "ids": [],
+       "focus": ""
+      }
+     ]
+    },
+    {
+     "id": "paint",
+     "title": "Luồng tô một ô",
+     "lead": "Bạn sẽ thấy dữ liệu đi qua những file nào khi chạm 1 ô.",
+     "blocks": [
+      {
+       "kind": "flow",
+       "id": "paint"
+      }
+     ]
+    },
+    {
+     "id": "renderer",
+     "title": "Chọn thư viện 3D",
+     "lead": "Bạn sẽ chọn giữa hai hướng làm khối 3D.",
+     "blocks": [
+      {
+       "kind": "decision",
+       "id": "renderer",
+       "status": "open",
+       "question": "Dùng thư viện 3D nào?",
+       "options": [
+        {
+         "id": "three",
+         "desc": "Phổ biến, 3D thật",
+         "label": "Three.js"
+        },
+        {
+         "id": "css",
+         "desc": "Nhẹ, không cần thư viện",
+         "label": "CSS 3D"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "storage",
+     "title": "Nơi lưu dữ liệu",
+     "lead": "Bạn sẽ thấy một quyết định đã được chốt.",
+     "blocks": [
+      {
+       "kind": "decision",
+       "id": "storage",
+       "status": "done",
+       "chosen": "local",
+       "note": "Chưa cần tài khoản người dùng, localStorage là đủ.",
+       "question": "Lưu trạng thái ở đâu?",
+       "options": [
+        {
+         "id": "local",
+         "desc": "Đơn giản, chạy offline",
+         "label": "localStorage"
+        },
+        {
+         "id": "server",
+         "desc": "Đồng bộ nhiều thiết bị",
+         "label": "Máy chủ"
+        },
+        {
+         "id": "file",
+         "desc": "Người dùng tự giữ",
+         "label": "Xuất file"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "flows": [
+  {
+   "id": "paint",
+   "title": "Tô 1 ô",
+   "description": "Người dùng chạm 1 ô trên lưới",
+   "steps": [
+    {
+     "nodeId": "file:js/ui/net-editor.js",
+     "label": "Nhận chạm",
+     "in": "index: 20",
+     "out": "{index:20,color:\"R\"}"
+    },
+    {
+     "nodeId": "file:js/app.js",
+     "label": "Gọi người gác cổng",
+     "in": "{index,color}",
+     "out": "lệnh tô hợp lệ?"
+    },
+    {
+     "nodeId": "file:js/core/validate.js",
+     "label": "Kiểm tra khối còn giải được",
+     "in": "trạng thái mới",
+     "out": "{ok:true}"
+    },
+    {
+     "nodeId": "file:js/core/cube-model.js",
+     "label": "Ghi màu vào 54 ô",
+     "in": "{index,color}",
+     "out": "state mới"
+    },
+    {
+     "nodeId": "file:js/ui/cube3d.js",
+     "label": "Vẽ lại khối 3D",
+     "in": "state mới",
+     "out": "khung hình"
+    }
+   ]
+  }
+ ]
+}

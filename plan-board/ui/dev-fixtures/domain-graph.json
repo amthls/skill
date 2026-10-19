@@ -1,0 +1,188 @@
+{
+ "version": "1.0.0",
+ "project": {
+  "name": "Rubik Solver",
+  "languages": [
+   "javascript",
+   "html",
+   "css"
+  ],
+  "frameworks": [],
+  "description": "Khối Rubik tương tác",
+  "analyzedAt": "2026-10-18T00:00:00.000Z",
+  "gitCommitHash": "plan"
+ },
+ "nodes": [
+  {
+   "id": "domain:rubik-solver",
+   "type": "domain",
+   "name": "Rubik Solver",
+   "summary": "Ứng dụng tô màu và giải khối Rubik.",
+   "tags": [],
+   "complexity": "simple",
+   "domainMeta": {
+    "entities": [
+     "Khối",
+     "Ô màu"
+    ],
+    "businessRules": [
+     "Khối phải giải được"
+    ]
+   }
+  },
+  {
+   "id": "flow:paint",
+   "type": "flow",
+   "name": "Tô 1 ô",
+   "summary": "Người dùng chạm 1 ô trên lưới.",
+   "tags": [],
+   "complexity": "simple",
+   "domainMeta": {
+    "entryPoint": "file:js/ui/net-editor.js",
+    "entryType": "manual"
+   }
+  },
+  {
+   "id": "flow:solve",
+   "type": "flow",
+   "name": "Giải khối",
+   "summary": "Bấm Giải để nhận lời giải.",
+   "tags": [],
+   "complexity": "simple",
+   "domainMeta": {
+    "entryPoint": "file:js/ui/controls.js",
+    "entryType": "manual"
+   }
+  },
+  {
+   "id": "step:paint:1",
+   "type": "step",
+   "name": "Nhận chạm",
+   "summary": "Nhận chạm\nvào: index: 20\nra: {index:20,color:\"R\"}",
+   "tags": [],
+   "complexity": "simple",
+   "filePath": "js/ui/net-editor.js",
+   "domainMeta": {
+    "entryPoint": "file:js/ui/net-editor.js"
+   }
+  },
+  {
+   "id": "step:paint:2",
+   "type": "step",
+   "name": "Gọi người gác cổng",
+   "summary": "Gọi người gác cổng\nvào: —\nra: —",
+   "tags": [],
+   "complexity": "simple",
+   "filePath": "js/app.js",
+   "domainMeta": {
+    "entryPoint": "file:js/app.js"
+   }
+  },
+  {
+   "id": "step:paint:3",
+   "type": "step",
+   "name": "Kiểm tra khối còn giải được",
+   "summary": "Kiểm tra khối còn giải được\nvào: —\nra: —",
+   "tags": [],
+   "complexity": "simple",
+   "filePath": "js/core/validate.js",
+   "domainMeta": {
+    "entryPoint": "file:js/core/validate.js"
+   }
+  },
+  {
+   "id": "step:paint:4",
+   "type": "step",
+   "name": "Vẽ lại khối 3D",
+   "summary": "Vẽ lại khối 3D\nvào: —\nra: —",
+   "tags": [],
+   "complexity": "simple",
+   "filePath": "js/ui/cube3d.js",
+   "domainMeta": {
+    "entryPoint": "file:js/ui/cube3d.js"
+   }
+  },
+  {
+   "id": "step:solve:1",
+   "type": "step",
+   "name": "Bấm nút Giải",
+   "summary": "Controls gửi trạng thái cho solver.",
+   "tags": [],
+   "complexity": "simple",
+   "domainMeta": {
+    "entryPoint": "file:js/ui/controls.js"
+   }
+  },
+  {
+   "id": "step:solve:2",
+   "type": "step",
+   "name": "Tìm lời giải",
+   "summary": "Solver chạy hai pha.",
+   "tags": [],
+   "complexity": "simple",
+   "domainMeta": {
+    "entryPoint": "file:js/core/solver.js"
+   }
+  }
+ ],
+ "edges": [
+  {
+   "source": "domain:rubik-solver",
+   "target": "flow:paint",
+   "type": "contains_flow",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "domain:rubik-solver",
+   "target": "flow:solve",
+   "type": "contains_flow",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "flow:paint",
+   "target": "step:paint:1",
+   "type": "flow_step",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "flow:paint",
+   "target": "step:paint:2",
+   "type": "flow_step",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "flow:paint",
+   "target": "step:paint:3",
+   "type": "flow_step",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "flow:paint",
+   "target": "step:paint:4",
+   "type": "flow_step",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "flow:solve",
+   "target": "step:solve:1",
+   "type": "flow_step",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "flow:solve",
+   "target": "step:solve:2",
+   "type": "flow_step",
+   "direction": "forward",
+   "weight": 0.5
+  }
+ ],
+ "layers": [],
+ "tour": []
+}

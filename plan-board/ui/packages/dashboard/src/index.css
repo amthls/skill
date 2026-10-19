@@ -1,0 +1,373 @@
+@import "tailwindcss";
+@source "./**/*.{ts,tsx,js,jsx,html}";
+@source "../index.html";
+
+@theme {
+  /* Base */
+  --color-root: #0a0a0a;
+  --color-surface: #111111;
+  --color-elevated: #1a1a1a;
+  --color-panel: #141414;
+
+  /* Accent */
+  --color-accent: #d4a574;
+  --color-accent-dim: #c9a96e;
+  --color-accent-bright: #e8c49a;
+
+  /* Text */
+  --color-text-primary: #f5f0eb;
+  --color-text-secondary: #a39787;
+  --color-text-muted: #6b5f53;
+
+  /* Borders */
+  --color-border-subtle: rgba(212, 165, 116, 0.12);
+  --color-border-medium: rgba(212, 165, 116, 0.25);
+
+  /* Node types */
+  --color-node-file: #4a7c9b;
+  --color-node-function: #5a9e6f;
+  --color-node-class: #8b6fb0;
+  --color-node-module: #c9a06c;
+  --color-node-concept: #b07a8a;
+  --color-node-config: #5eead4;
+  --color-node-document: #7dd3fc;
+  --color-node-service: #a78bfa;
+  --color-node-table: #6ee7b7;
+  --color-node-endpoint: #fdba74;
+  --color-node-pipeline: #fda4af;
+  --color-node-schema: #fcd34d;
+  --color-node-resource: #a5b4fc;
+
+  /* Knowledge node types */
+  --color-node-article: #d4a574;
+  --color-node-entity: #7ba4c9;
+  --color-node-topic: #c9b06c;
+  --color-node-claim: #6fb07a;
+  --color-node-source: #8a8a8a;
+
+  /* Diff */
+  --color-diff-changed: #e05252;
+  --color-diff-affected: #d4a030;
+  --color-diff-changed-dim: rgba(224, 82, 82, 0.25);
+  --color-diff-affected-dim: rgba(212, 160, 48, 0.25);
+
+  /* Glass */
+  --glass-bg: rgba(20, 20, 20, 0.8);
+  --glass-bg-heavy: rgba(20, 20, 20, 0.95);
+  --glass-border: rgba(212, 165, 116, 0.1);
+  --glass-border-heavy: rgba(212, 165, 116, 0.15);
+
+  /* Scrollbar */
+  --scrollbar-thumb: rgba(212, 165, 116, 0.2);
+  --scrollbar-thumb-hover: rgba(212, 165, 116, 0.35);
+
+  /* Glow */
+  --glow-accent: rgba(212, 165, 116, 0.15);
+  --glow-accent-strong: rgba(212, 165, 116, 0.4);
+  --glow-accent-pulse: rgba(212, 165, 116, 0.6);
+
+  /* Edges */
+  --color-edge: rgba(212, 165, 116, 0.3);
+  --color-edge-dim: rgba(212, 165, 116, 0.08);
+  --color-edge-dot: rgba(212, 165, 116, 0.15);
+
+  /* Accent overlays */
+  --color-accent-overlay-bg: rgba(212, 165, 116, 0.05);
+  --color-accent-overlay-border: rgba(212, 165, 116, 0.25);
+
+  /* Kbd */
+  --kbd-bg: rgba(212, 165, 116, 0.1);
+
+  /* Typography */
+  --font-serif: 'DM Serif Display', Georgia, serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-heading: var(--font-serif);
+}
+
+.font-heading { font-family: var(--font-heading); }
+
+/* Base styles */
+html {
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-root);
+  color: var(--color-text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Subtle noise texture overlay */
+.noise-overlay::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 9999;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* Glass utility */
+.glass {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.glass-heavy {
+  background: var(--glass-bg-heavy);
+  border: 1px solid var(--glass-border-heavy);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* Keyboard shortcut key styling */
+.kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.75rem;
+  height: 1.75rem;
+  padding: 0 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  background: var(--kbd-bg);
+  border: 1px solid var(--color-border-medium);
+  border-radius: 0.25rem;
+  box-shadow: 0 1px 0 var(--scrollbar-thumb);
+}
+
+/* Animation keyframes */
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes accentPulse {
+  0%, 100% {
+    box-shadow: 0 0 8px var(--glow-accent-strong);
+  }
+  50% {
+    box-shadow: 0 0 20px var(--glow-accent-pulse);
+  }
+}
+
+/* Animation utilities */
+.animate-fade-slide-in {
+  animation: fadeSlideIn 0.3s ease-out forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.3s ease-out forwards;
+}
+
+.animate-accent-pulse {
+  animation: accentPulse 2s ease-in-out infinite;
+}
+
+/* Node selection glow */
+.node-glow {
+  box-shadow: 0 0 20px var(--glow-accent);
+}
+
+/* Diff overlay glow effects */
+.diff-changed-glow {
+  box-shadow: 0 0 16px rgba(224, 82, 82, 0.25);
+}
+
+.diff-affected-glow {
+  box-shadow: 0 0 12px rgba(212, 160, 48, 0.2);
+}
+
+/* Diff fade for unrelated nodes */
+.diff-faded {
+  opacity: 0.25;
+  filter: saturate(0.3);
+  transition: opacity 0.3s ease, filter 0.3s ease;
+}
+
+/* Hide scrollbar but keep scroll functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Custom scrollbar for dark luxury theme */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+
+/* Override React Flow dark theme */
+.react-flow__background {
+  background-color: var(--color-root) !important;
+}
+
+/* Light theme overrides */
+[data-theme="light"] {
+  color-scheme: light;
+}
+
+[data-theme="light"] .diff-faded {
+  opacity: 0.35;
+}
+
+[data-theme="light"] ::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .warning-banner {
+  background: rgba(180, 130, 30, 0.1);
+  border-color: rgba(180, 130, 30, 0.3);
+  color: #92600a;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+/* ── Plan Board ─────────────────────────────────────────────── */
+
+/* Markdown typography (GFM) for plan blocks */
+.plan-md {
+  color: var(--color-text-secondary);
+  font-size: 15px;
+  line-height: 1.75;
+  overflow-wrap: anywhere;
+}
+.plan-md > :first-child { margin-top: 0; }
+.plan-md > :last-child { margin-bottom: 0; }
+.plan-md p { margin: 0.85em 0; }
+.plan-md strong { color: var(--color-text-primary); font-weight: 600; }
+.plan-md a { color: var(--color-accent); text-decoration: underline; text-underline-offset: 3px; }
+.plan-md a:hover { color: var(--color-accent-bright); }
+.plan-md h1, .plan-md h2, .plan-md h3, .plan-md h4 {
+  color: var(--color-text-primary);
+  font-family: var(--font-heading);
+  margin: 1.4em 0 0.5em;
+  line-height: 1.3;
+}
+.plan-md h3 { font-size: 1.15rem; }
+.plan-md h4 { font-size: 1rem; }
+.plan-md ul, .plan-md ol { margin: 0.85em 0; padding-left: 1.5em; }
+.plan-md ul { list-style: disc; }
+.plan-md ol { list-style: decimal; }
+.plan-md li { margin: 0.3em 0; }
+.plan-md li::marker { color: var(--color-accent-dim); }
+.plan-md ul.contains-task-list { list-style: none; padding-left: 0.25em; }
+.plan-md li.task-list-item { display: flex; align-items: baseline; gap: 0.6em; }
+.plan-md li.task-list-item input[type="checkbox"] {
+  appearance: none;
+  flex-shrink: 0;
+  width: 1.1em;
+  height: 1.1em;
+  border-radius: 4px;
+  border: 1.5px solid var(--color-border-medium);
+  background: var(--color-root);
+  position: relative;
+  top: 0.2em;
+}
+.plan-md li.task-list-item input[type="checkbox"]:checked {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+.plan-md li.task-list-item input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  left: 0.3em;
+  top: 0.08em;
+  width: 0.3em;
+  height: 0.6em;
+  border: solid var(--color-root);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+.plan-md blockquote {
+  margin: 1em 0;
+  padding: 0.6em 1em;
+  border-left: 3px solid var(--color-accent-dim);
+  background: var(--color-accent-overlay-bg);
+  border-radius: 0 8px 8px 0;
+  color: var(--color-text-secondary);
+}
+.plan-md blockquote p { margin: 0.3em 0; }
+.plan-md code {
+  font-family: var(--font-mono, "JetBrains Mono", monospace);
+  font-size: 0.88em;
+  padding: 0.15em 0.4em;
+  border-radius: 5px;
+  background: var(--color-elevated);
+  color: var(--color-accent-bright);
+}
+.plan-md pre {
+  margin: 1em 0;
+  padding: 0.9em 1.1em;
+  border-radius: 10px;
+  background: var(--color-root);
+  border: 1px solid var(--color-border-subtle);
+  overflow-x: auto;
+  line-height: 1.6;
+}
+.plan-md pre code { padding: 0; background: none; color: var(--color-text-primary); }
+.plan-md hr { border: 0; border-top: 1px solid var(--color-border-subtle); margin: 1.5em 0; }
+.plan-md-table {
+  margin: 1em 0;
+  overflow-x: auto;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 10px;
+}
+.plan-md table { width: 100%; border-collapse: collapse; font-size: 0.93em; }
+.plan-md th {
+  text-align: left;
+  padding: 0.6em 0.9em;
+  color: var(--color-text-primary);
+  font-weight: 600;
+  background: var(--color-elevated);
+  border-bottom: 1px solid var(--color-border-medium);
+  white-space: nowrap;
+}
+.plan-md td { padding: 0.55em 0.9em; border-top: 1px solid var(--color-border-subtle); }
+.plan-md tbody tr:nth-child(even) td { background: color-mix(in srgb, var(--color-elevated) 45%, transparent); }
+
+/* Glowing animated edge for the flow player's current step */
+.react-flow__edge.plan-edge-glow path.react-flow__edge-path {
+  filter: drop-shadow(0 0 5px var(--color-accent)) drop-shadow(0 0 10px var(--glow-accent-strong));
+}

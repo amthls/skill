@@ -1,0 +1,32 @@
+# Dự án game: sơ đồ khung — thay bằng tên file/khái niệm thật của dự án
+
+== engine: Engine | Vòng lặp, render, input
+src/engine/loop.js : Vòng lặp game #placeholder
+  fn tick(dt) -> void : Cập nhật mỗi khung hình
+src/engine/input.js : Nhận phím/chuột/cảm ứng #placeholder
+
+== gameplay: Gameplay | Luật chơi và trạng thái
+src/game/rules.js : Luật chơi, tính điểm #placeholder
+src/game/state.js : Trạng thái màn chơi #placeholder
+
+== assets: Tài nguyên | Hình, âm thanh, dữ liệu màn
+assets/ : Thư mục hình/âm (khái niệm) #placeholder
+
+== ui: Giao diện | Menu, HUD
+src/ui/hud.js : Điểm, mạng, thời gian #placeholder
+src/ui/menu.js : Menu chính #placeholder
+
+== test: Kiểm thử | Test luật chơi
+tests/rules.test.js : Test luật #placeholder
+
+# cạnh: nguồn -> đích1, đích2 [loại] : mô tả
+src/engine/loop.js -> src/engine/input.js, src/game/state.js : mỗi tick
+src/game/state.js -> src/game/rules.js
+src/ui/hud.js -> src/game/state.js : đọc để hiện
+src/game/rules.js -> tests/rules.test.js [tested_by]
+
+>> flow loop: Một khung hình | Từ input đến hình vẽ
+src/engine/input.js : Đọc input | vào: phím/chạm | ra: lệnh
+src/game/rules.js : Áp luật | vào: lệnh + trạng thái | ra: trạng thái mới
+src/game/state.js : Cập nhật trạng thái | vào: trạng thái mới | ra: đã lưu
+src/ui/hud.js : Vẽ HUD | vào: trạng thái | ra: khung hình
