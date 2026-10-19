@@ -13,6 +13,10 @@ This is **guidance and good defaults**, not a mandatory template.
 - If the user says otherwise → follow the user.
 - Talk to the user in their language (Vietnamese) unless they ask otherwise.
 
+**Weigh the cost of every choice.** Before following any part of this skill (a page, a subagent, a review, a check), ask: does the benefit to the user outweigh the tokens it costs? Follow it when it clearly helps understanding or quality; skip or shrink it when the task is small, the answer is obvious, or it would only repeat what's already known. Cheapest path that still gives a good result wins.
+
+**Subagents don't read this skill.** Never tell a subagent to load or read it. Put only the 1–2 lines of direction relevant to its task into the brief (e.g. "keep the change minimal, explain new terms for a beginner"), and let it decide the rest.
+
 ## 1. Explaining to a beginner
 The user knows: popular libraries, CRUD, basic databases. Weak at: database relations & keys, and most other concepts.
 
@@ -53,8 +57,10 @@ Good design = solves the right problem, as simply as possible, easy to change, d
 - Reuse an existing subagent via `SendMessage` for the same topic (it keeps its context); spawn a new one for a different topic or when the old one went off track.
 - Don't poll; background agents report when done.
 - Short briefs: goal, file paths (don't paste contents), constraints, ask for a report of ≤ 10 lines.
+- A subagent is only worth it when the work is big enough or parallel; spawning one costs context too, so a quick task is often cheaper done directly.
 
 **Code:** concise, readable, easy to use, reusable — small single-purpose functions, clear names, extract repeated code into shared functions, look for existing helpers before writing new ones, no "just in case" code, edit only what needs changing.
+Write the **smallest change that fully works**. Risky logic (money, permissions, deleting data) should come with a test.
 **Add a library** only if it doesn't clutter the project (if ~20 lines of your own code would do, write them; don't duplicate an existing library), doesn't cost tokens (popular, well documented), and doesn't break the project (maintained, version-compatible, run it after installing). Tell the user in one line: "added X to do Y, because Z".
 
 ## References
